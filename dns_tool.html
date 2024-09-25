@@ -1,0 +1,234 @@
+<!-- This loads the standard navbar, footer, styles, and scripts shared by every webpage on this site. -->
+{% extends "projects/base.html" %}
+    {% block page_head %}
+    {% block scripts %}
+    <!-- This is schema to help with SEO. -->
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "DNS Lookup Tool",
+            "description": "Perform DNS lookups for various DNS records including A, AAAA, MX, NS, CNAME, TXT, SOA, SRV, and CAA records.",
+            "url": "https://www.bencritt.net/projects/dns_tool/",
+            "applicationCategory": "Network Utility",
+            "operatingSystem": "Web-based",
+            "image": "https://i.imgur.com/jiKZkIp.png",
+            "creator": {
+              "@type": "Person",
+              "name": "Ben Crittenden",
+              "url": "https://www.bencritt.net"
+            },
+            "featureList": [
+              "Perform DNS lookups for various DNS record types.",
+              "Retrieve detailed DNS information useful for network troubleshooting and domain management.",
+              "Accessible from any web-enabled device with a user-friendly interface.",
+              "Developed with Python and Django for reliable DNS resolution."
+            ]
+          }          
+    </script>
+    {% endblock scripts %}    
+    {% block styles %} 
+    <!-- Custom CSS styles for the DNS Lookup Tool -->
+    <style>
+        .table-container {
+            width: 100%;    /* Ensures the container takes the full width */
+            overflow-x: auto; /* Ensures no horizontal overflow on smaller screens */
+        }
+        .table {
+            width: 100%;    /* Table takes the full width of the container */
+            border-collapse: collapse;  /* Merges table borders */
+            margin-top: 20px;   /* Adds space above the table */
+            table-layout: auto; /* Allow table to adjust automatically */
+        }
+        .table th {
+            padding: 8px;  /* Adjusted padding for better readability */
+            text-align: center;   /* Aligns text to the center for table headers */
+            border: 1px solid #ddd; /* Adds border around cells */
+            vertical-align: middle; /* Aligns content vertically in the middle */
+            word-break: break-word; /* Break long words to fit within the cell */
+            background-color: #f2f2f2;  /* Sets background color for table headers */
+        }
+        .table td {
+            padding: 8px;  /* Adjusted padding for better readability */
+            text-align: left;   /* Aligns text to the left for table data cells */
+            border: 1px solid #ddd; /* Adds border around cells */
+            vertical-align: middle; /* Aligns content vertically in the middle */
+            word-break: break-word; /* Break long words to fit within the cell */
+        }
+        .table tr:nth-child(even) {
+            background-color: #f9f9f9;  /* Alternates row colors for readability */
+        }
+        .table tr:hover {
+            background-color: #f1f1f1;  /* Changes background on hover for better interactivity */
+        }
+        ul {
+            margin: 0;  /* Removes margin */
+            padding-left: 20px; /* Adds padding to the left */
+            list-style-type: none; /* Removes bullet points from the list */
+        }
+        .centered-content {
+            text-align: center; /* Centers the content */
+        }
+        
+        /* Media Query for Smaller Screens */
+        @media (max-width: 600px) {
+            .table th, .table td {
+                font-size: 12px; /* Smaller font size for better fit */
+                padding: 6px; /* Reduced padding */
+            }
+        }        
+    </style>
+    <!--
+    <style>
+        .table-container {
+            width: 100%;    /* Ensures the container takes the full width */
+            overflow-x: auto; /* Ensures no horizontal overflow on smaller screens */
+        }
+        .table {
+            width: 100%;    /* Table takes the full width of the container */
+            border-collapse: collapse;  /* Merges table borders */
+            margin-top: 20px;   /* Adds space above the table */
+            table-layout: auto; /* Allow table to adjust automatically */
+        }
+        .table th {
+            padding: 8px;  /* Adjusted padding for better readability */
+            text-align: center;   /* Aligns text to the center for table headers */
+            border: 1px solid #ddd; /* Adds border around cells */
+            vertical-align: middle; /* Aligns content vertically in the middle */
+            word-break: break-word; /* Break long words to fit within the cell */
+            background-color: #f2f2f2;  /* Sets background color for table headers */
+        }
+        .table td {
+            padding: 8px;  /* Adjusted padding for better readability */
+            text-align: left;   /* Aligns text to the left for table data cells */
+            border: 1px solid #ddd; /* Adds border around cells */
+            vertical-align: middle; /* Aligns content vertically in the middle */
+            word-break: break-word; /* Break long words to fit within the cell */
+        }
+        .table tr:nth-child(even) {
+            background-color: #f9f9f9;  /* Alternates row colors for readability */
+        }
+        .table tr:hover {
+            background-color: #f1f1f1;  /* Changes background on hover for better interactivity */
+        }
+        ul {
+            margin: 0;  /* Removes margin */
+            padding-left: 20px; /* Adds padding to the left */
+            list-style-type: none; /* Removes bullet points from the list */
+        }
+        .centered-content {
+            text-align: center; /* Centers the content */
+        }
+        
+        /* Media Query for Smaller Screens */
+        @media (max-width: 600px) {
+            .table th, .table td {
+                font-size: 12px; /* Smaller font size for better fit */
+                padding: 6px; /* Reduced padding */
+            }
+        }        
+    </style>
+    -->      
+    {% endblock styles %}
+    {% block meta_tags %}
+    <!-- Meta to prevent caching, which will prevent CSRF token errors. -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!-- Meta tags providing essential information about the page to search engines. -->
+    <meta name="description" content="The DNS Lookup Tool allows users to perform detailed DNS lookups for domain names, retrieving various DNS records including A, AAAA, MX, NS, CNAME, TXT, SOA, SRV, and CAA records. Use it for network troubleshooting and domain management.">
+    <meta name="keywords" content="DNS Lookup, DNS Records, Domain Name System, A Records, MX Records, NS Records, CNAME Records, TXT Records, SOA Records, SRV Records, CAA Records">
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://www.bencritt.net/projects/dns_lookup/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DNS Lookup Tool">
+    <meta property="og:description" content="The DNS Lookup Tool allows users to perform DNS lookups for a specified domain name and retrieve various DNS records.">
+    <meta property="og:image" content="https://i.imgur.com/jiKZkIp.png">
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="bencritt.net">
+    <meta property="twitter:url" content="https://www.bencritt.net/projects/dns_tool/">
+    <meta name="twitter:title" content="DNS Lookup Tool">
+    <meta name="twitter:description" content="The DNS Lookup Tool allows users to perform DNS lookups for a specified domain name and retrieve various DNS records.">
+    <meta name="twitter:image" content="https://i.imgur.com/jiKZkIp.png">
+    <meta name="twitter:creator" content="@bencritt89"/>
+    {% endblock meta_tags %}
+    {% block link_tags %}
+    <!-- Canonical link to help avoid duplicate content issues. -->
+    <link rel="canonical" href="https://www.bencritt.net/projects/dns_tool/">
+    {% endblock link_tags %}
+    {% block title %}DNS Lookup Tool | Perform Detailed DNS Record Checks Online{% endblock title %}
+    {% endblock page_head %}
+    <!-- This begins the contents that are unique to this page. -->
+    {% block content %}
+    <main>
+        <center>
+            <h1>DNS Lookup Tool</h1>
+            <br>
+                <!-- Form for submitting domain name -->
+                <form method="post">
+                    {% csrf_token %}
+                    <!-- Renders form fields with paragraph tags -->
+                    {{ form.as_p }}
+                    <!-- Submit button for form -->
+                    <input type="submit" id="dns-lookup-btn" class="btn btn-primary" value="Look Up DNS Info">
+                    <br>
+                    <a href="/projects/it_tools/" class="btn btn-secondary" style="margin-top: 20px;">Go to All IT Tools</a>
+                </form>
+                <br>
+                <!-- Error message display -->
+                {% if error_message %}
+                    <p style="color: red;">{{ error_message }}</p>
+                {% endif %}
+
+                <!-- Display results if they exist -->
+                {% if results %}
+                <br>
+                    <!-- Header for results -->
+                    <h5>DNS Information for {{ form.cleaned_data.domain }}</h5>
+                    <center>
+                    <div class = "table-container" style = "width: 100%; max-width: 750px;">
+                    <!-- Table displaying DNS information -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <!-- Column header for record type -->
+                                <th>Record Type</th>
+                                <!-- Column header for details -->
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Loop through the results to display each record type and its details -->
+                            {% for record_type, records in results.items %}
+                                <tr>
+                                    <!-- Displays the record type -->
+                                    <td>{{ record_type }}</td>
+                                    <td>
+                                        {% if records %}
+                                            <ul>
+                                                {% for record in records %}
+                                                    <!-- Displays each record in a list item -->
+                                                    <li>{{ record }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% else %}
+                                            <!-- Message if no records are found -->
+                                            No records found
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                    </center>
+                {% endif %}
+                <br><br>
+                <!-- Link to the GitHub repository for the project. -->
+                <a href = "https://github.com/BenCritt/DNS_Lookup_Tool" target="_blank" rel="noopener noreferrer" data-toggle="tooltip" title="View the source code for this app."><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                  <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                </svg></a>
+        </center>
+    </main>
+    {% endblock content %}
